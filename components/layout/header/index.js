@@ -4,6 +4,8 @@ import { css } from '@emotion/react'
 import { AppBar, Box, Toolbar } from '@mui/material'
 import { styled } from '@mui/system'
 
+import Button from '@components/button'
+
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar)
 
 const Header = () => {
@@ -18,8 +20,27 @@ const Header = () => {
   return (
     <>
       <AppBar position="fixed" sx={styles.header}>
-        <Toolbar>
-          <Box>Forum</Box>
+        <Toolbar sx={{ padding: '0 8rem' }} disableGutters>
+          <Box
+            sx={{
+              display: 'flex',
+              flexGrow: 1,
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}
+          >
+            <Box>Forum</Box>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '1rem',
+              }}
+            >
+              <Button>Log In</Button>
+              <Button>Sign Up</Button>
+            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
       <Offset />
