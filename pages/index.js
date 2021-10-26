@@ -1,11 +1,5 @@
-import Header from '@components/layout/header'
-
 const HomePage = () => {
-  return (
-    <div>
-      <Header />
-    </div>
-  )
+  return <div>Home</div>
 }
 
 export default HomePage

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import PropTypes from 'prop-types'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { CacheProvider } from '@emotion/react'
@@ -6,6 +7,7 @@ import { CacheProvider } from '@emotion/react'
 import '@styles/globals.css'
 import theme from '@styles/theme'
 import createEmotionCache from '@styles/createEmotionCache'
+import Header from '@components/layout/header'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -22,6 +24,7 @@ const MyApp = ({
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Header />
         <Component {...pageProps} />
       </ThemeProvider>
     </CacheProvider>
@@ -29,3 +32,9 @@ const MyApp = ({
 }
 
 export default MyApp
+
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  emotionCache: PropTypes.object,
+  pageProps: PropTypes.object.isRequired,
+}
