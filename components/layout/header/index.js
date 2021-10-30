@@ -11,7 +11,7 @@ const Offset = styled('div')(({ theme }) => theme.mixins.toolbar)
 const Header = () => {
   const styles = {
     header: css`
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 15px 0px;
       background-color: #fff;
       color: #000;
     `,
