@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
           display: 'flex',
           justifyContent: 'space-between',
           gap: '4rem',
-          marginTop: '2rem',
+          padding: '3rem 0',
         }}
       >
         {children}
