@@ -21,11 +21,20 @@ const QuestionCard = ({ question }) => {
         padding: '0.875rem',
         boxShadow:
           'rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px',
+        '&:first-child': {
+          marginTop: '2rem',
+        },
       }}
     >
       <CardContent>
         <Box sx={{ display: 'flex', gap: '1rem' }}>
-          <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
             <FaCaretUp fontSize="1.75rem" />
             <Typography>{score}</Typography>
             <FaCaretDown fontSize="1.75rem" />

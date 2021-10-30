@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 import Layout from '@components/layout'
-import QuestionsContainer from '@components/question/questions-container'
+import Main from '@components/layout/main'
 
 const questions = [
   {
@@ -44,6 +44,32 @@ const questions = [
     created: new Date(),
     views: 10,
   },
+  {
+    _id: 4,
+    author: {
+      name: 'Rajat Shetty',
+      username: 'rajatshetty10',
+    },
+    title: 'Ok, so now, how to do this?',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ipsa sapiente commodi saepe quo repellat officiis ad nostrum necessitatibus quisquam eum eaque harum debitis voluptates alias expedita, officia nemo. Dolores odio quo perspiciatis iure explicabo, vel odit nobis atque voluptatum aperiam qui repudiandae eligendi aliquid dolore earum delectus officia asperiores.',
+    tags: ['javascript', 'react'],
+    score: 10,
+    created: new Date(),
+    views: 10,
+  },
+  {
+    _id: 5,
+    author: {
+      name: 'Rajat Shetty',
+      username: 'rajatshetty10',
+    },
+    title: 'Ok, so now, how to do this?',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ipsa sapiente commodi saepe quo repellat officiis ad nostrum necessitatibus quisquam eum eaque harum debitis voluptates alias expedita, officia nemo. Dolores odio quo perspiciatis iure explicabo, vel odit nobis atque voluptatum aperiam qui repudiandae eligendi aliquid dolore earum delectus officia asperiores.',
+    tags: ['javascript', 'react'],
+    score: 10,
+    created: new Date(),
+    views: 10,
+  },
 ]
 
 const HomePage = () => {
@@ -53,10 +79,10 @@ const HomePage = () => {
         <title>Forum</title>
       </Head>
       <Layout>
-        <Box component="main" sx={{ flexBasis: '65%' }}>
-          <QuestionsContainer questions={questions} />
+        <Main questions={questions} />
+        <Box sx={{ flexBasis: '35%', paddingTop: '3rem' }}>
+          <Typography variant="body1">Popular Tags</Typography>
         </Box>
-        <Box sx={{ flexBasis: '35%' }}>Content 2</Box>
       </Layout>
     </>
   )
