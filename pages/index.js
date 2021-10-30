@@ -1,7 +1,7 @@
 import Head from 'next/head'
+import { Box } from '@mui/material'
 
-import Sidebar from '@components/layout/sidebar'
-import { Container, Box, Typography } from '@mui/material'
+import Layout from '@components/layout'
 
 const HomePage = () => {
   return (
@@ -9,20 +9,15 @@ const HomePage = () => {
       <Head>
         <title>Forum</title>
       </Head>
-      <Container
-        fixed
-        maxWidth="xl"
-        sx={{
-          display: 'flex',
-          marginTop: '2rem',
-        }}
-      >
-        <Sidebar />
-        <Box component="main" sx={{ border: '1px solid red' }}>
+      <Layout>
+        <Box
+          component="main"
+          sx={{ border: '1px solid red', flexBasis: '60%' }}
+        >
           Content 1
         </Box>
-        <Box sx={{ border: '1px solid blue' }}>Content 2</Box>
-      </Container>
+        <Box sx={{ border: '1px solid blue', flexBasis: '40%' }}>Content 2</Box>
+      </Layout>
     </>
   )
 }

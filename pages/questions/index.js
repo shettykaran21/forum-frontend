@@ -1,5 +1,7 @@
+import Layout from '@components/layout'
+
 const QuestionsPage = () => {
-  return <div>Questions Page</div>
+  return <Layout>Questions Page</Layout>
 }
 
 export default QuestionsPage

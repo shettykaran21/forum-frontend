@@ -1,5 +1,7 @@
+import Layout from '@components/layout'
+
 const UsersPage = () => {
-  return <div>Users Page</div>
+  return <Layout>Users Page</Layout>
 }
 
 export default UsersPage

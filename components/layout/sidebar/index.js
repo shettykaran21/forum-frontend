@@ -1,7 +1,6 @@
-import { AppBar, Drawer, Toolbar, Typography } from '@mui/material'
+import { Drawer, Toolbar, Box } from '@mui/material'
 
 import Navigation from '@components/layout/navigation'
-import { Box } from '@mui/system'
 
 const drawerWidth = 240
 

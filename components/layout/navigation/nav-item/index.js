@@ -11,6 +11,7 @@ const NavItem = ({ href, children, selected, ...props }) => {
       align-items: center;
       gap: 1rem;
       padding-left: 2rem;
+      cursor: pointer;
     `,
   }
 

@@ -1,5 +1,7 @@
+import Layout from '@components/layout'
+
 const TagsPage = () => {
-  return <div>Tags Page</div>
+  return <Layout>Tags Page</Layout>
 }
 
 export default TagsPage

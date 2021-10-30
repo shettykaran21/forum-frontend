@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from '@emotion/react'
-import { FaHome, FaTags, FaUserFriends } from 'react-icons/fa'
+import { BiHomeAlt, BiPurchaseTag, BiUser } from 'react-icons/bi'
 
 import NavItem from './nav-item'
 
@@ -11,21 +11,22 @@ const Navigation = () => {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      margin-top: 2rem;
     `,
   }
 
   return (
     <nav css={styles.nav}>
       <NavItem href="/">
-        <FaHome />
+        <BiHomeAlt />
         <span>Home</span>
       </NavItem>
       <NavItem href="/tags">
-        <FaTags />
+        <BiPurchaseTag />
         <span>Tags</span>
       </NavItem>
       <NavItem href="/users">
-        <FaUserFriends />
+        <BiUser />
         <span>Users</span>
       </NavItem>
     </nav>
