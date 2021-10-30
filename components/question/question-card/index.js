@@ -9,6 +9,7 @@ import {
 import { FaCaretUp, FaCaretDown } from 'react-icons/fa'
 
 import Link from '@components/link'
+import Tag from '@components/tag'
 
 const QuestionCard = ({ question }) => {
   const { author, title, text, tags, score, created, views } = question
@@ -40,24 +41,32 @@ const QuestionCard = ({ question }) => {
             <FaCaretDown fontSize="1.75rem" />
           </Box>
           <Box>
-            <Typography
-              sx={{
-                fontSize: '1.25rem',
-                fontWeight: '600',
-                marginBottom: '1rem',
-                color: '#333',
-              }}
-            >
-              {title}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{ marginBottom: '1rem', color: '#777' }}
-            >
-              {text}
-            </Typography>
+            <Box>
+              <Typography
+                sx={{
+                  fontSize: '1.25rem',
+                  fontWeight: '600',
+                  marginBottom: '1rem',
+                  color: '#333',
+                }}
+              >
+                {title}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ marginBottom: '1rem', color: '#777' }}
+              >
+                {text}
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+              {tags.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
+            </Box>
           </Box>
         </Box>
+
         <Divider />
         <Typography
           variant="body2"
