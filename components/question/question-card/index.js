@@ -52,19 +52,20 @@ const QuestionCard = ({ question }) => {
           </Box>
           <Box>
             <Box>
-              <Link href={`/questions/${_id}`}>
-                <a>
-                  <Typography
-                    sx={{
-                      fontSize: '1.25rem',
-                      fontWeight: '600',
-                      marginBottom: '1rem',
-                      color: '#333',
-                    }}
-                  >
-                    {title}
-                  </Typography>
-                </a>
+              <Link
+                href={`/questions/${_id}`}
+                style={{ textDecoration: 'none' }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: '1.25rem',
+                    fontWeight: '600',
+                    marginBottom: '1rem',
+                    color: '#333',
+                  }}
+                >
+                  {title}
+                </Typography>
               </Link>
               <Typography
                 variant="body2"
@@ -94,14 +95,14 @@ const QuestionCard = ({ question }) => {
             <Typography variant="body2" sx={{ fontSize: '.75rem' }}>
               Posted by{' '}
               <Box component="span">
-                <Link href={`/users/${author.username}`}>
-                  <a
-                    style={{
-                      color: theme.palette.primary.main,
-                    }}
-                  >
-                    <span>{author.username}</span>
-                  </a>
+                <Link
+                  href={`/users/${author.username}`}
+                  style={{
+                    color: theme.palette.primary.main,
+                    textDecoration: 'none',
+                  }}
+                >
+                  <span>{author.username}</span>
                 </Link>
               </Box>
             </Typography>
