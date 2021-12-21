@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Box, Typography } from '@mui/material'
@@ -10,11 +10,20 @@ import FormInput from '@components/form-input'
 import Button from '@components/button'
 import api from 'utils/api'
 import { AuthContext } from '@context/auth'
+import { useRouter } from 'next/router'
 
 const LoginForm = () => {
-  const { setAuthState } = useContext(AuthContext)
+  const { setAuthState, isAuthenticated } = useContext(AuthContext)
 
   const [loading, setLoading] = useState(false)
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      router.push('/')
+    }
+  }, [isAuthenticated, router])
 
   const {
     values,
@@ -67,17 +76,16 @@ const LoginForm = () => {
       top: 50%;
       left: 50%;
       width: 25rem;
-      padding: 40px;
+      padding: 2.5rem;
       transform: translate(-50%, -50%);
       box-shadow: 0 10px 20px 0 rgba(153, 153, 153, 0.25);
       border-radius: 10px;
     `,
-    form: css``,
   }
 
   return (
     <Box sx={styles.container}>
-      <form onSubmit={handleSubmit} css={styles.form}>
+      <form onSubmit={handleSubmit}>
         <FormInput
           label="Username"
           type="text"

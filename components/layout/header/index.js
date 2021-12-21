@@ -1,11 +1,13 @@
 /** @jsxImportSource @emotion/react */
 
+import { useContext } from 'react'
 import { css } from '@emotion/react'
-import { AppBar, Box, Toolbar } from '@mui/material'
+import { AppBar, Box, Toolbar, Typography } from '@mui/material'
 import { styled } from '@mui/system'
 
 import Button from '@components/button'
 import Link from '@components/link'
+import { AuthContext } from '@context/auth'
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar)
 
@@ -17,6 +19,8 @@ const Header = () => {
       color: #000;
     `,
   }
+
+  const { authState, isAuthenticated, logout } = useContext(AuthContext)
 
   return (
     <>
@@ -32,23 +36,36 @@ const Header = () => {
             }}
           >
             <Box>Forum</Box>
-            <Box
-              sx={{
-                display: 'flex',
-                gap: '1rem',
-              }}
-            >
-              <Button>
-                <Link href={'/login'} style={{ color: 'inherit' }}>
-                  Login
-                </Link>
-              </Button>
-              <Button>
-                <Link href={'/signup'} style={{ color: 'inherit' }}>
-                  Sign Up
-                </Link>
-              </Button>
-            </Box>
+            <>
+              {isAuthenticated() ? (
+                <Box
+                  sx={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}
+                >
+                  <Link href={`/users/${authState.userInfo.username}`}>
+                    {authState.userInfo.username}
+                  </Link>
+                  <Button onClick={() => logout()}>Logout</Button>
+                </Box>
+              ) : (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: '1rem',
+                  }}
+                >
+                  <Button>
+                    <Link href={'/login'} style={{ color: 'inherit' }}>
+                      Login
+                    </Link>
+                  </Button>
+                  <Button>
+                    <Link href={'/signup'} style={{ color: 'inherit' }}>
+                      Sign Up
+                    </Link>
+                  </Button>
+                </Box>
+              )}
+            </>
           </Box>
         </Toolbar>
       </AppBar>
