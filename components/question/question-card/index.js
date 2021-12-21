@@ -12,7 +12,7 @@ import Link from '@components/link'
 import Tag from '@components/tag'
 
 const QuestionCard = ({ question }) => {
-  const { author, title, text, tags, score, views, created, _id } = question
+  const { author, title, text, tags, score, created, _id } = question
 
   const formattedDate = new Date(created)
     .toLocaleTimeString('en-IN', {
