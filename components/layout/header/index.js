@@ -5,6 +5,7 @@ import { AppBar, Box, Toolbar } from '@mui/material'
 import { styled } from '@mui/system'
 
 import Button from '@components/button'
+import Link from '@components/link'
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar)
 
@@ -37,8 +38,16 @@ const Header = () => {
                 gap: '1rem',
               }}
             >
-              <Button>Log In</Button>
-              <Button>Sign Up</Button>
+              <Button>
+                <Link href={'/login'} style={{ color: 'inherit' }}>
+                  Login
+                </Link>
+              </Button>
+              <Button>
+                <Link href={'/signup'} style={{ color: 'inherit' }}>
+                  Sign Up
+                </Link>
+              </Button>
             </Box>
           </Box>
         </Toolbar>
