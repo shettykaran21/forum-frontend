@@ -16,10 +16,12 @@ const SingleQuestionPage = ({ question }) => {
     _id,
   } = question
 
+  console.log(question)
+
   return <Layout>This is a single question page</Layout>
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }) => {
   const { slug } = params
 
   const { data } = await api.get(`/questions/question/${slug}`)
@@ -28,13 +30,6 @@ export const getStaticProps = async ({ params }) => {
     props: {
       question: data.data,
     },
-  }
-}
-
-export const getStaticPaths = () => {
-  return {
-    paths: [{ params: { slug: '619d12f66e2e1839a1bd662f' } }],
-    fallback: false,
   }
 }
 
