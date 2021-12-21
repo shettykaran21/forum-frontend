@@ -12,7 +12,17 @@ import Link from '@components/link'
 import Tag from '@components/tag'
 
 const QuestionCard = ({ question }) => {
-  const { author, title, text, tags, score, created, views } = question
+  const { author, title, text, tags, score, views, created, _id } = question
+
+  const formattedDate = new Date(created)
+    .toLocaleTimeString('en-IN', {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+    .replace(',', ' at')
+
   const theme = useTheme()
 
   return (
@@ -42,16 +52,20 @@ const QuestionCard = ({ question }) => {
           </Box>
           <Box>
             <Box>
-              <Typography
-                sx={{
-                  fontSize: '1.25rem',
-                  fontWeight: '600',
-                  marginBottom: '1rem',
-                  color: '#333',
-                }}
-              >
-                {title}
-              </Typography>
+              <Link href={`/questions/${_id}`}>
+                <a>
+                  <Typography
+                    sx={{
+                      fontSize: '1.25rem',
+                      fontWeight: '600',
+                      marginBottom: '1rem',
+                      color: '#333',
+                    }}
+                  >
+                    {title}
+                  </Typography>
+                </a>
+              </Link>
               <Typography
                 variant="body2"
                 sx={{ marginBottom: '1rem', color: '#777' }}
@@ -68,23 +82,39 @@ const QuestionCard = ({ question }) => {
         </Box>
 
         <Divider />
-        <Typography
-          variant="body2"
-          sx={{ marginTop: '1rem', fontSize: '.75rem' }}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: '1rem',
+          }}
         >
-          Posted by{' '}
-          <Box component="span">
-            <Link href={`/users/${author.username}`}>
-              <a
-                style={{
-                  color: theme.palette.primary.main,
-                }}
-              >
-                <span>{author.name}</span>
-              </a>
-            </Link>
+          <Box>
+            <Typography variant="body2" sx={{ fontSize: '.75rem' }}>
+              Posted by{' '}
+              <Box component="span">
+                <Link href={`/users/${author.username}`}>
+                  <a
+                    style={{
+                      color: theme.palette.primary.main,
+                    }}
+                  >
+                    <span>{author.username}</span>
+                  </a>
+                </Link>
+              </Box>
+            </Typography>
           </Box>
-        </Typography>
+          <Box>
+            <Typography
+              variant="body2"
+              sx={{ color: '#777', fontSize: '.75rem' }}
+            >
+              {formattedDate}
+            </Typography>
+          </Box>
+        </Box>
       </CardContent>
     </Card>
   )
