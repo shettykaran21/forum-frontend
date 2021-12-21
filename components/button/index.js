@@ -1,24 +1,79 @@
-import styled from '@emotion/styled'
-import { useTheme } from '@mui/material'
+/** @jsxImportSource @emotion/react */
 
-const StyledButton = styled.button`
-  background-color: ${({ color }) => color};
-  color: #fff;
-  text-transform: none;
-  border-radius: 5px;
-  padding: 0.75rem 1.25rem;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-`
+import { css, ClassNames } from '@emotion/react'
+import { useTheme } from '@mui/material/styles'
 
-const Button = ({ children, ...other }) => {
+const Button = ({ children, isLoading, ...other }) => {
   const theme = useTheme()
 
+  const styles = {
+    button: css`
+      background-color: ${theme.palette.primary.main};
+      color: #fff;
+      text-transform: none;
+      border-radius: 5px;
+      padding: 0.75rem 1.25rem;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all ease 0.5s;
+
+      &:disabled {
+        background-color: #aaa;
+      }
+    `,
+
+    loading: css`
+      padding-left: 2.2rem;
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        opacity: 0.3;
+        left: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid currentcolor;
+        border-radius: 50%;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid transparent;
+        border-left-color: currentcolor;
+        border-radius: 50%;
+        animation: spin 0.9s infinite cubic-bezier(0.5, 0.1, 0.5, 0.9);
+        filter: invert(0);
+        transform-origin: 50% 50% 1px;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    `,
+  }
+
   return (
-    <StyledButton color={theme.palette.primary.main} {...other}>
-      {children}
-    </StyledButton>
+    <ClassNames>
+      {({ css, cx }) => (
+        <button
+          {...other}
+          css={cx(css(styles.button), isLoading && css(styles.loading))}
+        >
+          {children}
+        </button>
+      )}
+    </ClassNames>
   )
 }
 

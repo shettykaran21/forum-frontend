@@ -1,11 +1,5 @@
-import {
-  Card,
-  CardContent,
-  Divider,
-  Typography,
-  Box,
-  useTheme,
-} from '@mui/material'
+import { Card, CardContent, Divider, Typography, Box } from '@mui/material'
+import { useTheme } from '@mui/material'
 import { FaCaretUp, FaCaretDown } from 'react-icons/fa'
 
 import Link from '@components/link'
