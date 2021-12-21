@@ -1,3 +1,5 @@
+import Head from 'next/head'
+
 import Layout from '@components/layout'
 import api from 'utils/api'
 
@@ -16,9 +18,11 @@ const SingleQuestionPage = ({ question }) => {
     _id,
   } = question
 
-  console.log(question)
-
-  return <Layout>This is a single question page</Layout>
+  return (
+    <Layout>
+      <Head>{title}</Head>
+    </Layout>
+  )
 }
 
 export const getServerSideProps = async ({ params }) => {
