@@ -8,6 +8,7 @@ import '@styles/globals.css'
 import theme from '@styles/theme'
 import createEmotionCache from '@styles/createEmotionCache'
 import Header from '@components/layout/header'
+import { AuthProvider } from '@context/auth'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -22,11 +23,13 @@ const MyApp = ({
         <title>Forum</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Header />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Header />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </AuthProvider>
     </CacheProvider>
   )
 }
