@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import { Box, Typography } from '@mui/material'
 
 import FormInput from '@components/form/form-input'
+import FormPasswordInput from '@components/form/form-password-input'
 import Button from '@components/button'
 import api from 'utils/api'
 import { AuthContext } from '@context/auth'
@@ -82,9 +83,8 @@ const LoginForm = () => {
           hasError={touched.username && errors.username}
           errorMsg={errors.username && errors.username}
         />
-        <FormInput
+        <FormPasswordInput
           label="Password"
-          type="password"
           name="password"
           autoComplete="off"
           value={values.password}

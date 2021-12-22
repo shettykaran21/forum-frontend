@@ -9,6 +9,7 @@ import Button from '@components/button'
 import api from 'utils/api'
 import { AuthContext } from '@context/auth'
 import FormContainer from '@components/form/form-container'
+import FormPasswordInput from '../form-password-input'
 
 const SignupForm = () => {
   const { setAuthState } = useContext(AuthContext)
@@ -83,9 +84,8 @@ const SignupForm = () => {
           hasError={touched.username && errors.username}
           errorMsg={errors.username && errors.username}
         />
-        <FormInput
+        <FormPasswordInput
           label="Password"
-          type="password"
           name="password"
           autoComplete="off"
           value={values.password}
@@ -94,9 +94,8 @@ const SignupForm = () => {
           hasError={touched.password && errors.password}
           errorMsg={errors.password && errors.password}
         />
-        <FormInput
+        <FormPasswordInput
           label="Confirm Password"
-          type="password"
           name="passwordConfirmation"
           autoComplete="off"
           value={values.passwordConfirmation}
