@@ -34,10 +34,7 @@ const Tag = ({ children }) => {
 
   return (
     <Box>
-      <Link
-        href={{ pathname: '/', query: { tag: children } }}
-        style={styles.tag}
-      >
+      <Link href={{ pathname: '/', query: { tag: children } }} sx={styles.tag}>
         {children}
       </Link>
     </Box>
