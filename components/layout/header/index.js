@@ -2,9 +2,8 @@
 
 import { useContext, useState } from 'react'
 import { css } from '@emotion/react'
-import { Alert, AppBar, Box, Grow, Toolbar } from '@mui/material'
+import { AppBar, Box, Toolbar } from '@mui/material'
 import { styled } from '@mui/system'
-import { MdClose } from 'react-icons/md'
 
 import Button from '@components/button'
 import Link from '@components/link'
@@ -48,7 +47,7 @@ const Header = () => {
             <>
               {isAuthenticated() ? (
                 <Box
-                  sx={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}
+                  sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}
                 >
                   <Link href={`/users/${authState.userInfo.username}`}>
                     {authState.userInfo.username}
