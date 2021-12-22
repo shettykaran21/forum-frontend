@@ -1,19 +1,27 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Box, Typography } from '@mui/material'
-import { lighten } from '@mui/material/styles'
 
-import FormInput from '@components/form-input'
+import FormInput from '@components/form/form-input'
 import Button from '@components/button'
 import api from 'utils/api'
 import { AuthContext } from '@context/auth'
-import FormContainer from '@components/form-container'
+import { useRouter } from 'next/router'
+import FormContainer from '@components/form/form-container'
 
-const SignupForm = () => {
-  const { setAuthState } = useContext(AuthContext)
+const LoginForm = () => {
+  const { setAuthState, isAuthenticated } = useContext(AuthContext)
 
   const [loading, setLoading] = useState(false)
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      router.push('/')
+    }
+  }, [isAuthenticated, router])
 
   const {
     values,
@@ -25,21 +33,17 @@ const SignupForm = () => {
     handleSubmit,
     isSubmitting,
   } = useFormik({
-    initialValues: { username: '', password: '', passwordConfirmation: '' },
+    initialValues: { username: '', password: '' },
 
     onSubmit: async (values, { setStatus, resetForm }) => {
       setLoading(true)
 
       try {
-        const { data } = await api.post(
-          '/auth/signup',
-          JSON.stringify(values),
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        )
+        const { data } = await api.post('/auth/login', JSON.stringify(values), {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
         const { token, expiresAt, userInfo } = data
         setAuthState({ token, expiresAt, userInfo })
         resetForm({})
@@ -53,8 +57,7 @@ const SignupForm = () => {
     validationSchema: Yup.object({
       username: Yup.string()
         .required('Required')
-        .min(5, 'Min 5 characters long')
-        .max(16, 'Max 16 characters long')
+        .max(16, 'Must be at most 16 characters long')
         .matches(/^[a-zA-Z0-9_-]+$/, 'Contains invalid characters'),
       password: Yup.string()
         .required('Required')
@@ -62,10 +65,6 @@ const SignupForm = () => {
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
           'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
         ),
-      passwordConfirmation: Yup.string().oneOf(
-        [Yup.ref('password'), null],
-        'Passwords must match'
-      ),
     }),
   })
 
@@ -94,17 +93,6 @@ const SignupForm = () => {
           hasError={touched.password && errors.password}
           errorMsg={errors.password && errors.password}
         />
-        <FormInput
-          label="Confirm Password"
-          type="password"
-          name="passwordConfirmation"
-          autoComplete="off"
-          value={values.passwordConfirmation}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          hasError={touched.passwordConfirmation && errors.passwordConfirmation}
-          errorMsg={errors.passwordConfirmation && errors.passwordConfirmation}
-        />
         {status && (
           <Typography sx={{ color: lighten('#ff0000', 0.5) }}>
             {status}
@@ -125,4 +113,4 @@ const SignupForm = () => {
   )
 }
 
-export default SignupForm
+export default LoginForm
