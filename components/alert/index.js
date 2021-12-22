@@ -4,9 +4,13 @@ import { MdClose } from 'react-icons/md'
 
 const CustomAlert = ({ isOpen, setIsOpen, title, alertMsg }) => {
   useEffect(() => {
-    setTimeout(() => {
+    let timer = setTimeout(() => {
       setIsOpen(false)
     }, 2000)
+
+    return () => {
+      clearTimeout(timer)
+    }
   }, [isOpen, setIsOpen])
 
   return (
