@@ -1,20 +1,23 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Box, Typography } from '@mui/material'
 import { lighten } from '@mui/material/styles'
 
 import FormInput from '@components/form/form-input'
+import FormPasswordInput from '@components/form/form-password-input'
 import Button from '@components/button'
 import api from 'utils/api'
 import { AuthContext } from '@context/auth'
 import FormContainer from '@components/form/form-container'
-import FormPasswordInput from '../form-password-input'
 
 const SignupForm = () => {
-  const { setAuthState } = useContext(AuthContext)
+  const { setAuthState, isAuthenticated } = useContext(AuthContext)
 
   const [loading, setLoading] = useState(false)
+
+  const router = useRouter()
 
   const {
     values,
@@ -69,6 +72,12 @@ const SignupForm = () => {
       ),
     }),
   })
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      router.push('/')
+    }
+  }, [isAuthenticated, router])
 
   return (
     <FormContainer>

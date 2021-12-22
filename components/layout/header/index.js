@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { css } from '@emotion/react'
-import { AppBar, Box, Toolbar, Typography } from '@mui/material'
+import { Alert, AppBar, Box, Grow, Toolbar } from '@mui/material'
 import { styled } from '@mui/system'
+import { MdClose } from 'react-icons/md'
 
 import Button from '@components/button'
 import Link from '@components/link'
@@ -22,8 +23,24 @@ const Header = () => {
 
   const { authState, isAuthenticated, logout } = useContext(AuthContext)
 
+  const [isOpen, setIsOpen] = useState(true)
+
   return (
     <>
+      <Grow in={isOpen}>
+        <Alert
+          severity="success"
+          action={
+            <MdClose
+              style={{ cursor: 'pointer' }}
+              onClick={() => setIsOpen(false)}
+            />
+          }
+          sx={{ position: 'absolute', bottom: '2rem', right: '2rem' }}
+        >
+          Logged out successfully
+        </Alert>
+      </Grow>
       <AppBar position="fixed" sx={styles.header}>
         <Toolbar sx={{ padding: '0 8rem' }} disableGutters>
           <Box
@@ -44,7 +61,14 @@ const Header = () => {
                   <Link href={`/users/${authState.userInfo.username}`}>
                     {authState.userInfo.username}
                   </Link>
-                  <Button onClick={() => logout()}>Logout</Button>
+                  <Button
+                    onClick={async () => {
+                      await logout()
+                      setIsOpen(true)
+                    }}
+                  >
+                    Logout
+                  </Button>
                 </Box>
               ) : (
                 <Box
