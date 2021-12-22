@@ -11,11 +11,13 @@ import Button from '@components/button'
 import api from 'utils/api'
 import { AuthContext } from '@context/auth'
 import FormContainer from '@components/form/form-container'
+import CustomAlert from '@components/alert'
 
 const LoginForm = () => {
   const { setAuthState, isAuthenticated } = useContext(AuthContext)
 
   const [loading, setLoading] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   const router = useRouter()
 
@@ -48,6 +50,7 @@ const LoginForm = () => {
         })
         const { token, expiresAt, userInfo } = data
         setAuthState({ token, expiresAt, userInfo })
+        setIsOpen(true)
         resetForm({})
       } catch (err) {
         setStatus(err.response.data.message)
@@ -71,46 +74,54 @@ const LoginForm = () => {
   })
 
   return (
-    <FormContainer>
-      <form onSubmit={handleSubmit}>
-        <FormInput
-          label="Username"
-          type="text"
-          name="username"
-          autoComplete="off"
-          value={values.username}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          hasError={touched.username && errors.username}
-          errorMsg={errors.username && errors.username}
-        />
-        <FormPasswordInput
-          label="Password"
-          name="password"
-          autoComplete="off"
-          value={values.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          hasError={touched.password && errors.password}
-          errorMsg={errors.password && errors.password}
-        />
-        {status && (
-          <Typography sx={{ color: lighten('#ff0000', 0.5) }}>
-            {status}
-          </Typography>
-        )}
-        <Box sx={{ marginTop: '2rem' }}>
-          <Button
-            type="submit"
-            isLoading={loading}
-            disabled={isSubmitting}
-            style={{ width: '100%' }}
-          >
-            Log in
-          </Button>
-        </Box>
-      </form>
-    </FormContainer>
+    <>
+      <CustomAlert
+        title={'Logged in successfully'}
+        alertMsg={'Redirecting...'}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
+      <FormContainer>
+        <form onSubmit={handleSubmit}>
+          <FormInput
+            label="Username"
+            type="text"
+            name="username"
+            autoComplete="off"
+            value={values.username}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            hasError={touched.username && errors.username}
+            errorMsg={errors.username && errors.username}
+          />
+          <FormPasswordInput
+            label="Password"
+            name="password"
+            autoComplete="off"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            hasError={touched.password && errors.password}
+            errorMsg={errors.password && errors.password}
+          />
+          {status && (
+            <Typography sx={{ color: lighten('#ff0000', 0.5) }}>
+              {status}
+            </Typography>
+          )}
+          <Box sx={{ marginTop: '2rem' }}>
+            <Button
+              type="submit"
+              isLoading={loading}
+              disabled={isSubmitting}
+              style={{ width: '100%' }}
+            >
+              Log in
+            </Button>
+          </Box>
+        </form>
+      </FormContainer>
+    </>
   )
 }
 

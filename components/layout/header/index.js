@@ -9,6 +9,7 @@ import { MdClose } from 'react-icons/md'
 import Button from '@components/button'
 import Link from '@components/link'
 import { AuthContext } from '@context/auth'
+import CustomAlert from '@components/alert'
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar)
 
@@ -23,24 +24,15 @@ const Header = () => {
 
   const { authState, isAuthenticated, logout } = useContext(AuthContext)
 
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
-      <Grow in={isOpen}>
-        <Alert
-          severity="success"
-          action={
-            <MdClose
-              style={{ cursor: 'pointer' }}
-              onClick={() => setIsOpen(false)}
-            />
-          }
-          sx={{ position: 'absolute', bottom: '2rem', right: '2rem' }}
-        >
-          Logged out successfully
-        </Alert>
-      </Grow>
+      <CustomAlert
+        title={'Logged out successfully'}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
       <AppBar position="fixed" sx={styles.header}>
         <Toolbar sx={{ padding: '0 8rem' }} disableGutters>
           <Box
