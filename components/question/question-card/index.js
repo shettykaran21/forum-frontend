@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { Card, CardContent, Divider, Typography, Box } from '@mui/material'
 import { useTheme } from '@mui/material'
 import { FaCaretUp, FaCaretDown } from 'react-icons/fa'
