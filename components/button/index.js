@@ -17,6 +17,7 @@ const Button = ({ children, isLoading, ...other }) => {
       cursor: pointer;
       font-family: inherit;
       transition: all ease 0.5s;
+      white-space: nowrap;
 
       &:disabled {
         background-color: #aaa;
