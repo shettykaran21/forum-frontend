@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import Layout from '@components/layout'
-import api from 'utils/api'
+import api from '@utils/api'
 
 const SingleQuestionPage = ({ question }) => {
   const {

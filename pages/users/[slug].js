@@ -1,9 +1,9 @@
-import Layout from '@components/layout'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Typography } from '@mui/material'
 
-import api from 'utils/api'
+import api from '@utils/api'
+import Layout from '@components/layout'
 import QuestionsContainer from '@components/question/questions-container'
 
 const SingleUserPage = () => {

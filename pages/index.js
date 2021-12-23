@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material'
 
 import Layout from '@components/layout'
 import Main from '@components/layout/main'
-import api from 'utils/api'
+import api from '@utils/api'
 
 const HomePage = ({ questions }) => {
   return (
