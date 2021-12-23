@@ -1,14 +1,16 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from '@mui/material/styles'
-import CssBaseline from '@mui/material/CssBaseline'
 import { CacheProvider } from '@emotion/react'
+import CssBaseline from '@mui/material/CssBaseline'
 
 import '@styles/globals.css'
 import theme from '@styles/theme'
 import createEmotionCache from '@styles/createEmotionCache'
 import Header from '@components/layout/header'
 import { AuthProvider } from '@context/auth'
+import { setAuthHeader } from '@utils/api'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -17,6 +19,12 @@ const MyApp = ({
   emotionCache = clientSideEmotionCache,
   pageProps,
 }) => {
+  useEffect(() => {
+    if (localStorage.token) {
+      setAuthHeader(localStorage.token)
+    }
+  }, [])
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
