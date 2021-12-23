@@ -64,6 +64,8 @@ const QuestionCard = ({ question }) => {
     }
   }
 
+  console.log()
+
   return (
     <Card
       sx={{
@@ -124,7 +126,7 @@ const QuestionCard = ({ question }) => {
                 variant="body2"
                 sx={{ marginBottom: '1rem', color: '#777' }}
               >
-                {text}
+                {text.length > 300 ? text.slice(0, 300).concat('...') : text}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
