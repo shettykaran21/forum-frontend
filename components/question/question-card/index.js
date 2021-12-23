@@ -26,32 +26,25 @@ const QuestionCard = ({ question }) => {
 
   const theme = useTheme()
 
-  const isVoted = () => {
+  const getExistingVoteValue = () => {
     if (isAuthenticated()) {
-      if (
-        votes.filter((vote) => vote.user === authState.userInfo.id).length > 0
-      ) {
-        return true
-      }
-      return false
-    }
-  }
-
-  const getVoteValue = () => {
-    if (isAuthenticated()) {
-      const userVote = votes.filter(
+      const existingUserVote = votes.filter(
         (vote) => vote.user === authState.userInfo.id
       )[0]
 
-      if (userVote) {
-        return userVote.vote
+      if (existingUserVote) {
+        return existingUserVote.vote
       }
     }
     return 0
   }
 
-  const handleUpvote = async () => {
-    if (getVoteValue() === 1) {
+  const vote = getExistingVoteValue()
+
+  const handleVote = async (vote) => {
+    const existingVoteValue = getExistingVoteValue()
+
+    if (existingVoteValue === 1 || existingVoteValue === -1) {
       try {
         const { data } = await api.put(`/votes/unvote/${_id}`)
         setQuestionData(data.data)
@@ -59,8 +52,11 @@ const QuestionCard = ({ question }) => {
         console.log(err)
       }
     } else {
+      let endPoint
+      endPoint = vote === 1 ? 'up' : 'down'
+
       try {
-        const { data } = await api.put(`/votes/upvote/${_id}`)
+        const { data } = await api.put(`/votes/${endPoint}vote/${_id}`)
         setQuestionData(data.data)
       } catch (err) {
         console.log(err)
@@ -91,11 +87,21 @@ const QuestionCard = ({ question }) => {
           >
             <FaCaretUp
               fontSize="1.75rem"
-              style={{ cursor: 'pointer' }}
-              onClick={handleUpvote}
+              style={{
+                cursor: 'pointer',
+                color: vote === 1 && theme.palette.primary.main,
+              }}
+              onClick={() => handleVote(1)}
             />
             <Typography>{score}</Typography>
-            <FaCaretDown fontSize="1.75rem" />
+            <FaCaretDown
+              fontSize="1.75rem"
+              style={{
+                cursor: 'pointer',
+                color: vote === -1 && theme.palette.primary.main,
+              }}
+              onClick={() => handleVote(-1)}
+            />
           </Box>
           <Box>
             <Box>
