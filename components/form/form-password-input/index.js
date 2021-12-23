@@ -31,7 +31,7 @@ const FormPasswordInput = ({
       variant="standard"
       fullWidth
       type={isVisible ? 'text' : 'password'}
-      error={hasError}
+      error={hasError ? true : false}
       helperText={hasError && errorMsg}
       margin="normal"
       {...props}

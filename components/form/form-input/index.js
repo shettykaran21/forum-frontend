@@ -7,7 +7,7 @@ const FormInput = ({ label, name, hasError = false, errorMsg, ...props }) => {
       label={label}
       variant="standard"
       fullWidth
-      error={hasError}
+      error={hasError ? true : false}
       helperText={hasError && errorMsg}
       margin="normal"
       {...props}
