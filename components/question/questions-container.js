@@ -1,11 +1,11 @@
-import { useState } from 'react'
 import { Box, Button, ButtonGroup } from '@mui/material'
 import { useTheme, lighten } from '@mui/material/styles'
 
 import QuestionCard from './question-card'
+import useStickyState from '@hooks/useStickyState'
 
 const QuestionsContainer = ({ questions }) => {
-  const [sortType, setSortType] = useState('Votes')
+  const [sortType, setSortType] = useStickyState('Votes', 'sortType')
 
   const theme = useTheme()
 
