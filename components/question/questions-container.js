@@ -10,6 +10,7 @@ import { useTheme, lighten } from '@mui/material/styles'
 import QuestionCard from './question-card'
 import useStickyState from '@hooks/useStickyState'
 import Button from '@components/button'
+import Link from '@components/link'
 
 const QuestionsContainer = ({ questions }) => {
   const [sortType, setSortType] = useStickyState('Votes', 'sortType')
@@ -50,7 +51,11 @@ const QuestionsContainer = ({ questions }) => {
             ? `Questions tagged [${router.query.tag}]`
             : 'All Questions'}
         </Typography>
-        <Button>Ask Question</Button>
+        <Button>
+          <Link href={'/questions/ask'} style={{ color: 'inherit' }}>
+            Ask Question
+          </Link>
+        </Button>
       </Box>
       <Box sx={{ alignSelf: 'flex-end' }}>
         <ButtonGroup>
