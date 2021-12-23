@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import { Drawer, Toolbar, Box } from '@mui/material'
 
 import Navigation from '@components/layout/navigation'
 import Link from '@components/link'
+import Logo from '@components/logo'
 
 const drawerWidth = 240
 
@@ -23,26 +23,7 @@ const Sidebar = () => {
       anchor="left"
     >
       <Toolbar>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center',
-            width: '100%',
-            transform: 'translateY(3px)',
-          }}
-        >
-          <Link href="/">
-            <Image
-              src="/logo-with-text.svg"
-              alt="logo"
-              layout="fixed"
-              height={45}
-              width={100}
-            />
-          </Link>
-        </Box>
+        <Logo center />
       </Toolbar>
       <Navigation />
     </Drawer>

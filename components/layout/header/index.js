@@ -9,6 +9,7 @@ import Button from '@components/button'
 import Link from '@components/link'
 import { AuthContext } from '@context/auth'
 import CustomAlert from '@components/alert'
+import Logo from '@components/logo'
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar)
 
@@ -43,7 +44,7 @@ const Header = () => {
               flexDirection: 'row',
             }}
           >
-            <Box>Forum</Box>
+            <Logo />
             <>
               {isAuthenticated() ? (
                 <Box
