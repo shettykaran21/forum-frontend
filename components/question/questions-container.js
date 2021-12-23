@@ -1,11 +1,20 @@
-import { Box, Button, ButtonGroup } from '@mui/material'
+import { useRouter } from 'next/router'
+import {
+  Box,
+  Button as MUIButton,
+  ButtonGroup,
+  Typography,
+} from '@mui/material'
 import { useTheme, lighten } from '@mui/material/styles'
 
 import QuestionCard from './question-card'
 import useStickyState from '@hooks/useStickyState'
+import Button from '@components/button'
 
 const QuestionsContainer = ({ questions }) => {
   const [sortType, setSortType] = useStickyState('Votes', 'sortType')
+
+  const router = useRouter()
 
   const theme = useTheme()
 
@@ -27,11 +36,26 @@ const QuestionsContainer = ({ questions }) => {
   const buttons = ['Votes', 'Views', 'Newest', 'Oldest']
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ alignSelf: 'flex-end', marginTop: '1rem' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingLeft: '1rem',
+        }}
+      >
+        <Typography sx={{ fontSize: '1.25rem', fontWeight: '600' }}>
+          {router.query.tag
+            ? `Questions tagged [${router.query.tag}]`
+            : 'All Questions'}
+        </Typography>
+        <Button>Ask Question</Button>
+      </Box>
+      <Box sx={{ alignSelf: 'flex-end' }}>
         <ButtonGroup>
           {buttons.map((button, i) => (
-            <Button
+            <MUIButton
               key={i}
               size="small"
               sx={
@@ -42,7 +66,7 @@ const QuestionsContainer = ({ questions }) => {
               onClick={() => setSortType(button)}
             >
               {button}
-            </Button>
+            </MUIButton>
           ))}
         </ButtonGroup>
       </Box>
