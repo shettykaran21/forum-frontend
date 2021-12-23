@@ -30,7 +30,12 @@ const HomePage = ({ questions }) => {
   return (
     <>
       <Head>
-        <title>Forum</title>
+        <title>
+          Forum |{' '}
+          {router.query.tag
+            ? `Questions tagged ${router.query.tag}`
+            : 'All Questions'}
+        </title>
       </Head>
       <Layout>
         <Main questions={questionsList} />
