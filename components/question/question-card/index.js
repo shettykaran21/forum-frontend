@@ -1,12 +1,19 @@
+import { useState, useContext, useEffect } from 'react'
 import { Card, CardContent, Divider, Typography, Box } from '@mui/material'
 import { useTheme } from '@mui/material'
 import { FaCaretUp, FaCaretDown } from 'react-icons/fa'
 
 import Link from '@components/link'
 import Tag from '@components/tag'
+import api from '@utils/api'
+import { AuthContext } from '@context/auth'
 
 const QuestionCard = ({ question }) => {
-  const { author, title, text, tags, score, created, _id } = question
+  const [questionData, setQuestionData] = useState(question)
+
+  const { author, title, text, tags, score, created, votes, _id } = questionData
+
+  const { isAuthenticated, authState } = useContext(AuthContext)
 
   const formattedDate = new Date(created)
     .toLocaleTimeString('en-IN', {
@@ -18,6 +25,48 @@ const QuestionCard = ({ question }) => {
     .replace(',', ' at')
 
   const theme = useTheme()
+
+  const isVoted = () => {
+    if (isAuthenticated()) {
+      if (
+        votes.filter((vote) => vote.user === authState.userInfo.id).length > 0
+      ) {
+        return true
+      }
+      return false
+    }
+  }
+
+  const getVoteValue = () => {
+    if (isAuthenticated()) {
+      const userVote = votes.filter(
+        (vote) => vote.user === authState.userInfo.id
+      )[0]
+
+      if (userVote) {
+        return userVote.vote
+      }
+    }
+    return 0
+  }
+
+  const handleUpvote = async () => {
+    if (getVoteValue() === 1) {
+      try {
+        const { data } = await api.put(`/votes/unvote/${_id}`)
+        setQuestionData(data.data)
+      } catch (err) {
+        console.log(err)
+      }
+    } else {
+      try {
+        const { data } = await api.put(`/votes/upvote/${_id}`)
+        setQuestionData(data.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
 
   return (
     <Card
@@ -40,7 +89,11 @@ const QuestionCard = ({ question }) => {
               alignItems: 'center',
             }}
           >
-            <FaCaretUp fontSize="1.75rem" />
+            <FaCaretUp
+              fontSize="1.75rem"
+              style={{ cursor: 'pointer' }}
+              onClick={handleUpvote}
+            />
             <Typography>{score}</Typography>
             <FaCaretDown fontSize="1.75rem" />
           </Box>
