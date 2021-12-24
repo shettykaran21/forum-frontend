@@ -10,7 +10,7 @@ import FormPasswordInput from '@components/form/form-password-input'
 import Button from '@components/button'
 import api from '@utils/api'
 import { AuthContext } from '@context/auth'
-import FormContainer from '@components/form/form-container'
+import Form from '@components/form'
 import CustomAlert from '@components/alert'
 
 const LoginForm = () => {
@@ -81,46 +81,44 @@ const LoginForm = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      <FormContainer>
-        <form onSubmit={handleSubmit}>
-          <FormInput
-            label="Username"
-            type="text"
-            name="username"
-            autoComplete="off"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            hasError={touched.username && errors.username}
-            errorMsg={errors.username && errors.username}
-          />
-          <FormPasswordInput
-            label="Password"
-            name="password"
-            autoComplete="off"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            hasError={touched.password && errors.password}
-            errorMsg={errors.password && errors.password}
-          />
-          {status && (
-            <Typography sx={{ color: lighten('#ff0000', 0.5) }}>
-              {status}
-            </Typography>
-          )}
-          <Box sx={{ marginTop: '2rem' }}>
-            <Button
-              type="submit"
-              isLoading={loading}
-              disabled={isSubmitting}
-              style={{ width: '100%' }}
-            >
-              Log in
-            </Button>
-          </Box>
-        </form>
-      </FormContainer>
+      <Form onSubmit={handleSubmit}>
+        <FormInput
+          label="Username"
+          type="text"
+          name="username"
+          autoComplete="off"
+          value={values.username}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          hasError={touched.username && errors.username}
+          errorMsg={errors.username && errors.username}
+        />
+        <FormPasswordInput
+          label="Password"
+          name="password"
+          autoComplete="off"
+          value={values.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          hasError={touched.password && errors.password}
+          errorMsg={errors.password && errors.password}
+        />
+        {status && (
+          <Typography sx={{ color: lighten('#ff0000', 0.5) }}>
+            {status}
+          </Typography>
+        )}
+        <Box sx={{ marginTop: '2rem' }}>
+          <Button
+            type="submit"
+            isLoading={loading}
+            disabled={isSubmitting}
+            style={{ width: '100%' }}
+          >
+            Log in
+          </Button>
+        </Box>
+      </Form>
     </>
   )
 }
