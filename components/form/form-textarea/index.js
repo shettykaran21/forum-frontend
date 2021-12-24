@@ -1,12 +1,25 @@
 import { TextField } from '@mui/material'
 
-const FormTextArea = () => {
+const FormTextArea = ({
+  label,
+  name,
+  hasError = false,
+  errorMsg,
+  variant = 'standard',
+  ...props
+}) => {
   return (
     <TextField
-      placeholder="MultiLine with rows: 2 and rowsMax: 4"
+      id={name}
+      label={label}
+      variant={variant}
+      fullWidth
+      error={hasError ? true : false}
+      helperText={hasError && errorMsg}
+      margin="normal"
       multiline
-      rows={2}
-      maxRows={4}
+      minRows={6}
+      {...props}
     />
   )
 }

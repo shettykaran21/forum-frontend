@@ -5,6 +5,8 @@ import * as Yup from 'yup'
 
 import api from '@utils/api'
 import FormInput from '@components/form/form-input'
+import Form from '@components/form'
+import FormTextArea from '@components/form/form-textarea'
 
 const QuestionForm = () => {
   const router = useRouter()
@@ -52,20 +54,33 @@ const QuestionForm = () => {
   })
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} width="50rem">
       <FormInput
         label="Title"
         type="text"
         name="title"
         autoComplete="off"
         value={values.title}
+        variant="outlined"
         onChange={handleChange}
         onBlur={handleBlur}
         hasError={touched.title && errors.title}
-        errorMessage={errors.title && errors.title}
+        errorMsg={errors.title && errors.title}
         placeholder="e.g. Can you force a React component to rerender without calling setState?"
       />
-    </form>
+      <FormTextArea
+        label="Body"
+        type="text"
+        name="text"
+        autoComplete="off"
+        value={values.text}
+        variant="outlined"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        hasError={touched.text && errors.text}
+        errorMsg={errors.text && errors.text}
+      />
+    </Form>
   )
 }
 
