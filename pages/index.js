@@ -6,6 +6,7 @@ import Layout from '@components/layout'
 import Main from '@components/layout/main'
 import api from '@utils/api'
 import PopularTags from '@components/popular-tags'
+import { Box } from '@mui/material'
 
 const HomePage = ({ questions }) => {
   const [questionsList, setQuestionsList] = useState(questions)
@@ -39,7 +40,15 @@ const HomePage = ({ questions }) => {
       </Head>
       <Layout>
         <Main questions={questionsList} />
-        <PopularTags />
+        <Box
+          sx={{
+            position: 'relative',
+            flex: '0 0 30%',
+            height: '100%',
+          }}
+        >
+          <PopularTags />
+        </Box>
       </Layout>
     </>
   )

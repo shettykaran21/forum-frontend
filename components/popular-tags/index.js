@@ -8,7 +8,12 @@ const PopularTags = () => {
   const { popularTags } = useContext(TagContext)
 
   return (
-    <Box sx={{ flexBasis: '30%', paddingTop: '1rem' }}>
+    <Box
+      sx={{
+        paddingTop: '2rem',
+        position: 'fixed',
+      }}
+    >
       <Typography variant="h2" sx={{ fontSize: '1.25rem', fontWeight: '400' }}>
         Popular Tags
       </Typography>
@@ -16,7 +21,7 @@ const PopularTags = () => {
         sx={{
           display: 'flex',
           flexWrap: 'wrap',
-          gap: '.25rem',
+          gap: '0.25rem',
           padding: '1rem 0',
         }}
       >

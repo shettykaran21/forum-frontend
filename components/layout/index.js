@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
         maxWidth="lg"
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
+          alignItems: 'flex-start',
           gap: '4rem',
           paddingBottom: '3rem',
         }}
