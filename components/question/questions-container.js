@@ -64,9 +64,11 @@ const QuestionsContainer = ({ questions }) => {
               key={i}
               size="small"
               sx={
-                sortType === button && {
-                  backgroundColor: lighten(theme.palette.primary.main, 0.8),
-                }
+                sortType === button
+                  ? {
+                      backgroundColor: lighten(theme.palette.primary.main, 0.8),
+                    }
+                  : {}
               }
               onClick={() => setSortType(button)}
             >

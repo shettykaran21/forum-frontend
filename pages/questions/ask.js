@@ -1,5 +1,16 @@
+import Head from 'next/head'
+
+import QuestionForm from '@components/question/question-form'
+
 const QuestionAskPage = () => {
-  return <div>Question Ask Page</div>
+  return (
+    <>
+      <Head>
+        <title>Forum | Ask a Question</title>
+      </Head>
+      <QuestionForm />
+    </>
+  )
 }
 
 export default QuestionAskPage
