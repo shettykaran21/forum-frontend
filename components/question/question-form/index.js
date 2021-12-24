@@ -2,11 +2,14 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { Typography, Box } from '@mui/material'
+import { lighten } from '@mui/material/styles'
 
 import api from '@utils/api'
 import FormInput from '@components/form/form-input'
 import Form from '@components/form'
 import FormTextArea from '@components/form/form-textarea'
+import Button from '@components/button'
 
 const QuestionForm = () => {
   const router = useRouter()
@@ -80,6 +83,16 @@ const QuestionForm = () => {
         hasError={touched.text && errors.text}
         errorMsg={errors.text && errors.text}
       />
+      {status && (
+        <Typography sx={{ color: lighten('#ff0000', 0.8) }}>
+          {status}
+        </Typography>
+      )}
+      <Box sx={{ marginTop: '1rem' }}>
+        <Button type="submit" isLoading={loading} disabled={isSubmitting}>
+          Post Question
+        </Button>
+      </Box>
     </Form>
   )
 }

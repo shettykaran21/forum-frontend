@@ -1,13 +1,9 @@
-import { useRouter } from 'next/router'
-import {
-  Box,
-  Button as MUIButton,
-  ButtonGroup,
-  Typography,
-} from '@mui/material'
-import { useTheme, lighten } from '@mui/material/styles'
+/** @jsxImportSource @emotion/react */
 
+import { useRouter } from 'next/router'
+import { Box, Typography, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import QuestionCard from './question-card'
+
 import useStickyState from '@hooks/useStickyState'
 import Button from '@components/button'
 import Link from '@components/link'
@@ -16,8 +12,6 @@ const QuestionsContainer = ({ questions }) => {
   const [sortType, setSortType] = useStickyState('Votes', 'sortType')
 
   const router = useRouter()
-
-  const theme = useTheme()
 
   const handleSorting = () => {
     switch (sortType) {
@@ -58,24 +52,17 @@ const QuestionsContainer = ({ questions }) => {
         </Button>
       </Box>
       <Box sx={{ alignSelf: 'flex-end' }}>
-        <ButtonGroup>
+        <ToggleButtonGroup
+          exclusive
+          value={sortType}
+          onChange={(e, newSortType) => setSortType(newSortType)}
+        >
           {buttons.map((button, i) => (
-            <MUIButton
-              key={i}
-              size="small"
-              sx={
-                sortType === button
-                  ? {
-                      backgroundColor: lighten(theme.palette.primary.main, 0.8),
-                    }
-                  : {}
-              }
-              onClick={() => setSortType(button)}
-            >
+            <ToggleButton key={i} size="small" color="primary" value={button}>
               {button}
-            </MUIButton>
+            </ToggleButton>
           ))}
-        </ButtonGroup>
+        </ToggleButtonGroup>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
         {questions?.sort(handleSorting()).map((question) => (
