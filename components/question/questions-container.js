@@ -40,7 +40,10 @@ const QuestionsContainer = ({ questions }) => {
           paddingLeft: '1rem',
         }}
       >
-        <Typography sx={{ fontSize: '1.25rem', fontWeight: '600' }}>
+        <Typography
+          component="h1"
+          sx={{ fontSize: '1.5rem', fontWeight: '700' }}
+        >
           {router.query.tag
             ? `Questions tagged [${router.query.tag}]`
             : 'All Questions'}

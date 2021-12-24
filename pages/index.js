@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Typography } from '@mui/material'
 
 import Layout from '@components/layout'
 import Main from '@components/layout/main'
 import api from '@utils/api'
+import PopularTags from '@components/popular-tags'
 
 const HomePage = ({ questions }) => {
   const [questionsList, setQuestionsList] = useState(questions)
@@ -39,9 +39,7 @@ const HomePage = ({ questions }) => {
       </Head>
       <Layout>
         <Main questions={questionsList} />
-        <Box sx={{ flexBasis: '35%', paddingTop: '3rem' }}>
-          <Typography variant="body1">Popular Tags</Typography>
-        </Box>
+        <PopularTags />
       </Layout>
     </>
   )

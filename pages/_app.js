@@ -10,6 +10,7 @@ import theme from '@styles/theme'
 import createEmotionCache from '@styles/createEmotionCache'
 import Header from '@components/layout/header'
 import { AuthProvider } from '@context/auth'
+import { TagProvider } from '@context/popularTags'
 import { setAuthHeader } from '@utils/api'
 
 const clientSideEmotionCache = createEmotionCache()
@@ -32,11 +33,13 @@ const MyApp = ({
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <AuthProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Header />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <TagProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Header />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </TagProvider>
       </AuthProvider>
     </CacheProvider>
   )
