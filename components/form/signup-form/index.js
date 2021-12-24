@@ -67,12 +67,11 @@ const SignupForm = () => {
         .required('Required')
         .matches(
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-          'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
+          'Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character'
         ),
-      passwordConfirmation: Yup.string().oneOf(
-        [Yup.ref('password'), null],
-        'Passwords must match'
-      ),
+      passwordConfirmation: Yup.string()
+        .required('Required')
+        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     }),
   })
 
