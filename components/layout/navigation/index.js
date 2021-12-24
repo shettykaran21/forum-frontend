@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from '@emotion/react'
+import { Typography } from '@mui/material'
 import { BiHomeAlt, BiPurchaseTag, BiUser } from 'react-icons/bi'
 
 import NavItem from './nav-item'
@@ -15,6 +16,16 @@ const Navigation = () => {
 
   return (
     <nav css={styles.nav}>
+      <Typography
+        sx={{
+          padding: '0.75rem 0',
+          paddingLeft: '4rem',
+          fontSize: '.75rem',
+          letterSpacing: '1px',
+        }}
+      >
+        MENU
+      </Typography>
       <NavItem href="/">
         <BiHomeAlt />
         <span>Home</span>
