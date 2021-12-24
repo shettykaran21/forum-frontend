@@ -11,7 +11,6 @@ const TagProvider = ({ children }) => {
     const fetchPopularTags = async () => {
       const { data } = await api.get('/tags/popular-tags')
       setPopularTags(data.data)
-      console.log(data)
     }
 
     fetchPopularTags()
