@@ -8,7 +8,7 @@ import { lighten } from '@mui/material/styles'
 import FormInput from '@components/form/form-input'
 import FormPasswordInput from '@components/form/form-password-input'
 import Button from '@components/button'
-import api from '@utils/api'
+import api, { setAuthHeader } from '@utils/api'
 import { AuthContext } from '@context/auth'
 import Form from '@components/form'
 import CustomAlert from '@components/alert'
@@ -48,6 +48,7 @@ const SignupForm = () => {
         )
         const { token, expiresAt, userInfo } = data
         setAuthState({ token, expiresAt, userInfo })
+        setAuthHeader(token)
         setIsOpen(true)
         resetForm({})
       } catch (err) {

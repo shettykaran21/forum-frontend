@@ -1,3 +1,4 @@
+import { setAuthHeader } from '@utils/api'
 import { createContext, useState, useEffect } from 'react'
 
 const AuthContext = createContext()
@@ -33,6 +34,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem('token')
     localStorage.removeItem('userInfo')
     localStorage.removeItem('expiresAt')
+    setAuthHeader(null)
     setAuthState({})
   }
 
