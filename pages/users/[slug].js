@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 import { Typography } from '@mui/material'
 
 import api from '@utils/api'
@@ -8,6 +7,7 @@ import Layout from '@components/layout'
 import Loader from '@components/loader'
 import QuestionsContainer from '@components/question/questions-container'
 import NoData from '@components/no-data'
+import ErrorText from '@components/error-text'
 
 const SingleUserPage = () => {
   const [userQuestions, setUserQuestions] = useState(null)
@@ -38,11 +38,11 @@ const SingleUserPage = () => {
   return (
     <Layout sx={{ padding: '1rem 0' }}>
       {isLoading && <Loader />}
-      {!isLoading && error && <Typography>{error}</Typography>}
-      {!isLoading && !error && userQuestions.length === 0 && (
+      {!isLoading && error && <ErrorText msg={error} />}
+      {!isLoading && !error && userQuestions?.length === 0 && (
         <NoData text="No questions asked by user" />
       )}
-      {!isLoading && !error && userQuestions.length > 0 && (
+      {!isLoading && !error && userQuestions?.length > 0 && (
         <QuestionsContainer questions={userQuestions} />
       )}
     </Layout>
