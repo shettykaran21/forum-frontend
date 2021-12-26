@@ -3,24 +3,11 @@ import Head from 'next/head'
 import api from '@utils/api'
 import Layout from '@components/layout'
 import PopularTags from '@components/popular-tags'
-import { Box } from '@mui/material'
+import Main from '@components/layout/main'
+import QuestionDetails from '@components/question-details'
 
 const SingleQuestionPage = ({ question }) => {
-  const {
-    answers,
-    author,
-    comments,
-    created,
-    score,
-    tags,
-    text,
-    title,
-    views,
-    votes,
-    _id,
-  } = question
-
-  console.log(question)
+  const { title } = question
 
   return (
     <>
@@ -35,9 +22,9 @@ const SingleQuestionPage = ({ question }) => {
           paddingBottom: '3rem',
         }}
       >
-        <Box component="main" sx={{ flex: '0 0 70%', padding: '1rem 0' }}>
-          Hello World
-        </Box>
+        <Main>
+          <QuestionDetails question={question} />
+        </Main>
         <PopularTags />
       </Layout>
     </>

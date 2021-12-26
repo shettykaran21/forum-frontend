@@ -7,6 +7,8 @@ import Link from '@components/link'
 import Tag from '@components/tag'
 import api from '@utils/api'
 import { AuthContext } from '@context/auth'
+import TagsContainer from '@components/tags-container'
+import { formatDate } from '@utils/index'
 
 const QuestionCard = ({ question }) => {
   const [questionData, setQuestionData] = useState(question)
@@ -15,14 +17,7 @@ const QuestionCard = ({ question }) => {
 
   const { isAuthenticated, authState } = useContext(AuthContext)
 
-  const formattedDate = new Date(created)
-    .toLocaleTimeString('en-IN', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    })
-    .replace(',', ' at')
+  const formattedDate = formatDate(created)
 
   const theme = useTheme()
 
@@ -127,11 +122,11 @@ const QuestionCard = ({ question }) => {
                 {text.length > 300 ? text.slice(0, 300).concat('...') : text}
               </Typography>
             </Box>
-            <Box sx={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+            <TagsContainer>
               {tags.map((tag) => (
                 <Tag key={tag}>{tag}</Tag>
               ))}
-            </Box>
+            </TagsContainer>
           </Box>
         </Box>
 

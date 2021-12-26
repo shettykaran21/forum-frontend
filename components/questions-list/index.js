@@ -1,7 +1,7 @@
 import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 import useStickyState from '@hooks/useStickyState'
-import QuestionCard from '@components/question/question-card'
+import QuestionCard from '@components/question-card'
 import QuestionsContainer from '@components/questions-container'
 
 const QuestionsList = ({ questions }) => {
