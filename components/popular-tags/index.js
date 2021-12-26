@@ -10,26 +10,37 @@ const PopularTags = () => {
   return (
     <Box
       sx={{
-        paddingTop: '2rem',
-        position: 'fixed',
+        position: 'relative',
+        flex: '0 0 30%',
+        height: '100%',
       }}
     >
-      <Typography variant="h2" sx={{ fontSize: '1.25rem', fontWeight: '400' }}>
-        Popular Tags
-      </Typography>
       <Box
         sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '0.25rem',
-          padding: '1rem 0',
+          paddingTop: '2rem',
+          position: 'fixed',
         }}
       >
-        {popularTags?.map((tag) => (
-          <Tag key={tag._id} count={tag.count}>
-            {tag._id}
-          </Tag>
-        ))}
+        <Typography
+          variant="h2"
+          sx={{ fontSize: '1.25rem', fontWeight: '400' }}
+        >
+          Popular Tags
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.25rem',
+            padding: '1rem 0',
+          }}
+        >
+          {popularTags?.map((tag) => (
+            <Tag key={tag._id} count={tag.count}>
+              {tag._id}
+            </Tag>
+          ))}
+        </Box>
       </Box>
     </Box>
   )

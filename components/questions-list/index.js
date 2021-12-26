@@ -1,9 +1,10 @@
-import { Box, Link, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 import useStickyState from '@hooks/useStickyState'
-import QuestionCard from './question-card'
+import QuestionCard from '@components/question/question-card'
+import QuestionsContainer from '@components/questions-container'
 
-const QuestionsContainer = ({ questions }) => {
+const QuestionsList = ({ questions }) => {
   const [sortType, setSortType] = useStickyState('Votes', 'sortType')
 
   const buttons = ['Votes', 'Views', 'Newest', 'Oldest']
@@ -24,7 +25,7 @@ const QuestionsContainer = ({ questions }) => {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', padding: '1rem 0' }}>
+    <QuestionsContainer>
       <Box sx={{ alignSelf: 'flex-end' }}>
         <ToggleButtonGroup
           exclusive
@@ -43,8 +44,8 @@ const QuestionsContainer = ({ questions }) => {
           <QuestionCard key={question._id} question={question} />
         ))}
       </Box>
-    </Box>
+    </QuestionsContainer>
   )
 }
 
-export default QuestionsContainer
+export default QuestionsList

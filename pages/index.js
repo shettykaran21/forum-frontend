@@ -2,11 +2,13 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
+import api from '@utils/api'
 import Layout from '@components/layout'
 import Main from '@components/layout/main'
-import api from '@utils/api'
 import PopularTags from '@components/popular-tags'
-import { Box } from '@mui/material'
+import QuestionsContainer from '@components/questions-container'
+import QuestionBar from '@components/question-bar'
+import QuestionsList from '@components/questions-list'
 
 const HomePage = ({ questions }) => {
   const [questionsList, setQuestionsList] = useState(questions)
@@ -46,16 +48,13 @@ const HomePage = ({ questions }) => {
           paddingBottom: '3rem',
         }}
       >
-        <Main questions={questionsList} />
-        <Box
-          sx={{
-            position: 'relative',
-            flex: '0 0 30%',
-            height: '100%',
-          }}
-        >
-          <PopularTags />
-        </Box>
+        <Main>
+          <QuestionBar />
+          <QuestionsContainer>
+            <QuestionsList questions={questionsList} />
+          </QuestionsContainer>
+        </Main>
+        <PopularTags />
       </Layout>
     </>
   )
