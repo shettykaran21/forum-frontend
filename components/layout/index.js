@@ -2,19 +2,11 @@ import { Container, Box } from '@mui/material'
 
 import Sidebar from '@components/layout/sidebar'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, ...props }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <Sidebar />
-      <Container
-        maxWidth="lg"
-        sx={{
-          display: 'flex',
-          alignItems: 'flex-start',
-          gap: '4rem',
-          paddingBottom: '3rem',
-        }}
-      >
+      <Container maxWidth="lg" {...props}>
         {children}
       </Container>
     </Box>

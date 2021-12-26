@@ -38,7 +38,14 @@ const HomePage = ({ questions }) => {
             : 'All Questions'}
         </title>
       </Head>
-      <Layout>
+      <Layout
+        sx={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: '4rem',
+          paddingBottom: '3rem',
+        }}
+      >
         <Main questions={questionsList} />
         <Box
           sx={{

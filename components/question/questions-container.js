@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
 
 import { useRouter } from 'next/router'
-import { Box, Typography, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import QuestionCard from './question-card'
 
 import useStickyState from '@hooks/useStickyState'
 import Button from '@components/button'
 import Link from '@components/link'
+import PageTitle from '@components/page-title'
 
 const QuestionsContainer = ({ questions }) => {
   const [sortType, setSortType] = useStickyState('Votes', 'sortType')
@@ -40,14 +41,13 @@ const QuestionsContainer = ({ questions }) => {
           paddingLeft: '1rem',
         }}
       >
-        <Typography
-          component="h1"
-          sx={{ fontSize: '1.5rem', fontWeight: '700' }}
-        >
-          {router.query.tag
-            ? `Questions tagged [${router.query.tag}]`
-            : 'All Questions'}
-        </Typography>
+        <PageTitle
+          title={
+            router.query.tag
+              ? `Questions tagged [${router.query.tag}]`
+              : 'All Questions'
+          }
+        />
         <Button>
           <Link href={'/questions/ask'} style={{ color: 'inherit' }}>
             Ask Question
