@@ -34,7 +34,7 @@ const UsersPage = ({ users }) => {
   return (
     <>
       <Head>
-        <title>Forum | Users</title>
+        <title>Forum | Users {searchTerm && ` - ${searchTerm}`}</title>
       </Head>
       <Layout sx={{ padding: '2rem 0' }}>
         <PageTitle title="Users" />
