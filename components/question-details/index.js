@@ -5,6 +5,7 @@ import PageTitle from '@components/page-title'
 import Tag from '@components/tag'
 import TagsContainer from '@components/tags-container'
 import { formatDate } from '@utils/index'
+import CommentsList from '@components/comments-list'
 
 const QuestionDetails = ({ question }) => {
   const {
@@ -20,6 +21,8 @@ const QuestionDetails = ({ question }) => {
     votes,
     _id,
   } = question
+
+  console.log(question)
 
   const formattedDate = formatDate(created)
 
@@ -64,6 +67,7 @@ const QuestionDetails = ({ question }) => {
             {formattedDate}
           </Typography>
         </Box>
+        <CommentsList comments={comments} />
       </Box>
     </Box>
   )
