@@ -64,8 +64,6 @@ const QuestionCard = ({ question }) => {
     }
   }
 
-  console.log()
-
   return (
     <Card
       sx={{
