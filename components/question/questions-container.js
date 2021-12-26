@@ -1,18 +1,12 @@
-/** @jsxImportSource @emotion/react */
-
-import { useRouter } from 'next/router'
-import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material'
-import QuestionCard from './question-card'
+import { Box, Link, ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 import useStickyState from '@hooks/useStickyState'
-import Button from '@components/button'
-import Link from '@components/link'
-import PageTitle from '@components/page-title'
+import QuestionCard from './question-card'
 
 const QuestionsContainer = ({ questions }) => {
   const [sortType, setSortType] = useStickyState('Votes', 'sortType')
 
-  const router = useRouter()
+  const buttons = ['Votes', 'Views', 'Newest', 'Oldest']
 
   const handleSorting = () => {
     switch (sortType) {
@@ -29,31 +23,8 @@ const QuestionsContainer = ({ questions }) => {
     }
   }
 
-  const buttons = ['Votes', 'Views', 'Newest', 'Oldest']
-
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingLeft: '1rem',
-        }}
-      >
-        <PageTitle
-          title={
-            router.query.tag
-              ? `Questions tagged [${router.query.tag}]`
-              : 'All Questions'
-          }
-        />
-        <Button>
-          <Link href={'/questions/ask'} style={{ color: 'inherit' }}>
-            Ask Question
-          </Link>
-        </Button>
-      </Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column', padding: '1rem 0' }}>
       <Box sx={{ alignSelf: 'flex-end' }}>
         <ToggleButtonGroup
           exclusive
