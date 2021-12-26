@@ -8,7 +8,7 @@ import Tag from '@components/tag'
 import api from '@utils/api'
 import { AuthContext } from '@context/auth'
 import TagsContainer from '@components/tags-container'
-import { formatDate } from '@utils/index'
+import { formatDate, getExistingVoteValue } from '@utils/index'
 
 const QuestionCard = ({ question }) => {
   const [questionData, setQuestionData] = useState(question)
@@ -21,23 +21,14 @@ const QuestionCard = ({ question }) => {
 
   const theme = useTheme()
 
-  const getExistingVoteValue = () => {
-    if (isAuthenticated()) {
-      const existingUserVote = votes.filter(
-        (vote) => vote.user === authState.userInfo.id
-      )[0]
-
-      if (existingUserVote) {
-        return existingUserVote.vote
-      }
-    }
-    return 0
-  }
-
-  const vote = getExistingVoteValue()
+  const vote = getExistingVoteValue(isAuthenticated, votes, authState)
 
   const handleVote = async (vote) => {
-    const existingVoteValue = getExistingVoteValue()
+    const existingVoteValue = getExistingVoteValue(
+      isAuthenticated,
+      votes,
+      authState
+    )
 
     if (existingVoteValue === 1 || existingVoteValue === -1) {
       try {

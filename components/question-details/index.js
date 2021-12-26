@@ -1,13 +1,16 @@
+import { useContext } from 'react'
 import { FaCaretUp, FaCaretDown } from 'react-icons/fa'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, useTheme } from '@mui/material'
 
+import api from '@utils/api'
 import PageTitle from '@components/page-title'
 import Tag from '@components/tag'
 import TagsContainer from '@components/tags-container'
-import { formatDate } from '@utils/index'
+import { formatDate, getExistingVoteValue } from '@utils/index'
 import CommentsList from '@components/comments-list'
+import { AuthContext } from '@context/auth'
 
-const QuestionDetails = ({ question }) => {
+const QuestionDetails = ({ question, setQuestionData }) => {
   const {
     answers,
     author,
@@ -22,9 +25,40 @@ const QuestionDetails = ({ question }) => {
     _id,
   } = question
 
-  console.log(question)
+  const theme = useTheme()
 
   const formattedDate = formatDate(created)
+
+  const { isAuthenticated, authState } = useContext(AuthContext)
+
+  const vote = getExistingVoteValue(isAuthenticated, votes, authState)
+
+  const handleVote = async (vote) => {
+    const existingVoteValue = getExistingVoteValue(
+      isAuthenticated,
+      votes,
+      authState
+    )
+
+    if (existingVoteValue === 1 || existingVoteValue === -1) {
+      try {
+        const { data } = await api.put(`/votes/unvote/${_id}`)
+        setQuestionData(data.data)
+      } catch (err) {
+        console.log(err)
+      }
+    } else {
+      let endPoint
+      endPoint = vote === 1 ? 'up' : 'down'
+
+      try {
+        const { data } = await api.put(`/votes/${endPoint}vote/${_id}`)
+        setQuestionData(data.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
 
   return (
     <Box sx={{ display: 'flex', gap: '1rem' }}>
@@ -39,6 +73,7 @@ const QuestionDetails = ({ question }) => {
           fontSize="2.5rem"
           style={{
             cursor: 'pointer',
+            color: vote === 1 && theme.palette.primary.main,
           }}
           onClick={() => handleVote(1)}
         />
@@ -47,6 +82,7 @@ const QuestionDetails = ({ question }) => {
           fontSize="2.5rem"
           style={{
             cursor: 'pointer',
+            color: vote === -1 && theme.palette.primary.main,
           }}
           onClick={() => handleVote(-1)}
         />

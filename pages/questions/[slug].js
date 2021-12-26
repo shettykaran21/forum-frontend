@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useState } from 'react'
 
 import api from '@utils/api'
 import Layout from '@components/layout'
@@ -7,6 +8,8 @@ import Main from '@components/layout/main'
 import QuestionDetails from '@components/question-details'
 
 const SingleQuestionPage = ({ question }) => {
+  const [questionData, setQuestionData] = useState(question)
+
   const { title } = question
 
   return (
@@ -23,7 +26,10 @@ const SingleQuestionPage = ({ question }) => {
         }}
       >
         <Main>
-          <QuestionDetails question={question} />
+          <QuestionDetails
+            question={questionData}
+            setQuestionData={setQuestionData}
+          />
         </Main>
         <PopularTags />
       </Layout>

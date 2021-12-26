@@ -8,3 +8,16 @@ export const formatDate = (date) => {
     })
     .replace(',', ' at')
 }
+
+export const getExistingVoteValue = (isAuth, votes, authState) => {
+  if (isAuth()) {
+    const existingUserVote = votes.filter(
+      (vote) => vote.user === authState.userInfo.id
+    )[0]
+
+    if (existingUserVote) {
+      return existingUserVote.vote
+    }
+  }
+  return 0
+}
