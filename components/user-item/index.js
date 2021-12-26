@@ -1,5 +1,6 @@
-import Link from '@components/link'
 import { Box, Typography } from '@mui/material'
+
+import Link from '@components/link'
 
 const UserItem = ({ userData }) => {
   const { username, created } = userData

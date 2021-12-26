@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import { lighten, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 
-import Layout from '@components/layout'
 import api from '@utils/api'
+import Layout from '@components/layout'
 import PageTitle from '@components/page-title'
 import UsersList from '@components/users-list'
 import UserItem from '@components/user-item'
@@ -12,14 +11,14 @@ import ErrorText from '@components/error-text'
 
 const UsersPage = ({ users }) => {
   const [usersData, setUsersData] = useState(users)
-  const [searchTerm, setSearchTerm] = useState(null)
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value)
   }
 
   useEffect(() => {
-    if (searchTerm !== null) {
+    if (searchTerm !== '') {
       const delayDebounceFn = setTimeout(async () => {
         const { data } = await api.get(
           searchTerm ? `/users/${searchTerm}` : `/users`
@@ -37,15 +36,11 @@ const UsersPage = ({ users }) => {
         <title>Forum | Users {searchTerm && ` - ${searchTerm}`}</title>
       </Head>
       <Layout sx={{ padding: '2rem 0' }}>
-        <PageTitle title="Users" />
+        <PageTitle title={searchTerm ? `Users [${searchTerm}]` : 'Users'} />
         <SearchInput handleChange={handleInputChange} value={searchTerm} />
         {users && (
           <>
-            <UsersList>
-              {usersData?.map((user) => (
-                <UserItem key={user._id} userData={user} />
-              ))}
-            </UsersList>
+            <UsersList users={usersData} />
             {usersData?.length === 0 && <ErrorText msg="No users found" />}
           </>
         )}

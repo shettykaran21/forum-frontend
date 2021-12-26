@@ -12,7 +12,7 @@ const SearchInput = ({ handleChange, value }) => {
       value={value}
       InputProps={{
         endAdornment: (
-          <InputAdornment>
+          <InputAdornment position="end">
             <FaSearch />
           </InputAdornment>
         ),
