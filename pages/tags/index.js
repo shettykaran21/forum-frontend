@@ -26,6 +26,13 @@ const TagsPage = ({ tags }) => {
       }, 500)
 
       return () => clearTimeout(delayDebounceFn)
+    } else {
+      const fetchData = async () => {
+        const { data } = await api.get('/tags')
+        setTagsData(data.data)
+      }
+
+      fetchData()
     }
   }, [searchTerm])
 

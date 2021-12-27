@@ -5,7 +5,6 @@ import api from '@utils/api'
 import Layout from '@components/layout'
 import PageTitle from '@components/page-title'
 import UsersList from '@components/users-list'
-import UserItem from '@components/user-item'
 import SearchInput from '@components/search-input'
 import ErrorText from '@components/error-text'
 
@@ -27,6 +26,13 @@ const UsersPage = ({ users }) => {
       }, 500)
 
       return () => clearTimeout(delayDebounceFn)
+    } else {
+      const fetchData = async () => {
+        const { data } = await api.get('/users')
+        setUsersData(data.data)
+      }
+
+      fetchData()
     }
   }, [searchTerm])
 
