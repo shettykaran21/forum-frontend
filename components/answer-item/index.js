@@ -1,5 +1,34 @@
-const AnswerItem = ({ answer }) => {
-  return <div>{answer.text}</div>
+import { Box, Divider, Typography } from '@mui/material'
+
+import CommentsList from '@components/comments-list'
+import UpvoteDownvote from '@components/upvote-downvote'
+import { formatDate } from '@utils/index'
+
+const AnswerItem = ({ answer, setQuestionData }) => {
+  const { comments, created, text } = answer
+
+  const formattedDate = formatDate(created)
+
+  return (
+    <Box>
+      <Box sx={{ display: 'flex', gap: '1rem' }}>
+        <UpvoteDownvote data={answer} setData={setQuestionData} />
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography sx={{ margin: '1rem 0' }}>{text}</Typography>
+          <Box sx={{ display: 'flex' }}>
+            <Typography
+              variant="body2"
+              sx={{ color: '#777', fontSize: '.875rem', marginLeft: 'auto' }}
+            >
+              {formattedDate}
+            </Typography>
+          </Box>
+          <CommentsList comments={comments} />
+        </Box>
+      </Box>
+      <Divider />
+    </Box>
+  )
 }
 
 export default AnswerItem

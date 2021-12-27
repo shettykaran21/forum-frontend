@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Divider, Typography } from '@mui/material'
 
 import PageTitle from '@components/page-title'
 import Tag from '@components/tag'
@@ -13,26 +13,29 @@ const QuestionDetails = ({ question, setQuestionData }) => {
   const formattedDate = formatDate(created)
 
   return (
-    <Box sx={{ display: 'flex', gap: '1rem' }}>
-      <UpvoteDownvote data={question} setData={setQuestionData} />
-      <Box>
-        <PageTitle title={title} />
-        <Typography sx={{ margin: '1rem 0' }}>{text}</Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <TagsContainer>
-            {tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </TagsContainer>
-          <Typography
-            variant="body2"
-            sx={{ color: '#777', fontSize: '.875rem' }}
-          >
-            {formattedDate}
-          </Typography>
+    <Box>
+      <Box sx={{ display: 'flex', gap: '1rem' }}>
+        <UpvoteDownvote data={question} setData={setQuestionData} />
+        <Box sx={{ flexGrow: 1 }}>
+          <PageTitle title={title} />
+          <Typography sx={{ margin: '1rem 0' }}>{text}</Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <TagsContainer>
+              {tags.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
+            </TagsContainer>
+            <Typography
+              variant="body2"
+              sx={{ color: '#777', fontSize: '.875rem' }}
+            >
+              {formattedDate}
+            </Typography>
+          </Box>
+          <CommentsList comments={comments} />
         </Box>
-        <CommentsList comments={comments} />
       </Box>
+      <Divider />
     </Box>
   )
 }

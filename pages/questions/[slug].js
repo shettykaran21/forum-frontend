@@ -31,7 +31,10 @@ const SingleQuestionPage = ({ question }) => {
             question={questionData}
             setQuestionData={setQuestionData}
           />
-          <AnswersList answers={questionData.answers} />
+          <AnswersList
+            answers={questionData.answers}
+            setQuestionData={setQuestionData}
+          />
         </Main>
         <PopularTags />
       </Layout>
