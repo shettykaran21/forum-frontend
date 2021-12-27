@@ -1,54 +1,21 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, Divider, Typography, Box } from '@mui/material'
 import { useTheme } from '@mui/material'
-import { FaCaretUp, FaCaretDown } from 'react-icons/fa'
 
 import Link from '@components/link'
 import Tag from '@components/tag'
-import api from '@utils/api'
-import { AuthContext } from '@context/auth'
 import TagsContainer from '@components/tags-container'
-import { formatDate, getExistingVoteValue } from '@utils/index'
+import { formatDate } from '@utils/index'
+import UpvoteDownvote from '@components/upvote-downvote'
 
 const QuestionCard = ({ question }) => {
   const [questionData, setQuestionData] = useState(question)
 
-  const { author, title, text, tags, score, created, votes, _id } = questionData
-
-  const { isAuthenticated, authState } = useContext(AuthContext)
+  const { author, title, text, tags, created, _id } = questionData
 
   const formattedDate = formatDate(created)
 
   const theme = useTheme()
-
-  const vote = getExistingVoteValue(isAuthenticated, votes, authState)
-
-  const handleVote = async (vote) => {
-    const existingVoteValue = getExistingVoteValue(
-      isAuthenticated,
-      votes,
-      authState
-    )
-
-    if (existingVoteValue === 1 || existingVoteValue === -1) {
-      try {
-        const { data } = await api.put(`/votes/unvote/${_id}`)
-        setQuestionData(data.data)
-      } catch (err) {
-        console.log(err)
-      }
-    } else {
-      let endPoint
-      endPoint = vote === 1 ? 'up' : 'down'
-
-      try {
-        const { data } = await api.put(`/votes/${endPoint}vote/${_id}`)
-        setQuestionData(data.data)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-  }
 
   return (
     <Card
@@ -64,31 +31,7 @@ const QuestionCard = ({ question }) => {
     >
       <CardContent>
         <Box sx={{ display: 'flex', gap: '1rem' }}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <FaCaretUp
-              fontSize="1.75rem"
-              style={{
-                cursor: 'pointer',
-                color: vote === 1 && theme.palette.primary.main,
-              }}
-              onClick={() => handleVote(1)}
-            />
-            <Typography>{score}</Typography>
-            <FaCaretDown
-              fontSize="1.75rem"
-              style={{
-                cursor: 'pointer',
-                color: vote === -1 && theme.palette.primary.main,
-              }}
-              onClick={() => handleVote(-1)}
-            />
-          </Box>
+          <UpvoteDownvote data={questionData} setData={setQuestionData} />
           <Box>
             <Box>
               <Link

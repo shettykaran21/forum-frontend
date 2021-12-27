@@ -8,8 +8,7 @@ import CommentsList from '@components/comments-list'
 import UpvoteDownvote from '@components/upvote-downvote'
 
 const QuestionDetails = ({ question, setQuestionData }) => {
-  const { comments, created, tags, text, title, score, views, votes, _id } =
-    question
+  const { comments, created, tags, text, title } = question
 
   const formattedDate = formatDate(created)
 
