@@ -6,6 +6,7 @@ import Layout from '@components/layout'
 import PopularTags from '@components/popular-tags'
 import Main from '@components/layout/main'
 import QuestionDetails from '@components/question-details'
+import AnswersList from '@components/answers-list'
 
 const SingleQuestionPage = ({ question }) => {
   const [questionData, setQuestionData] = useState(question)
@@ -30,6 +31,7 @@ const SingleQuestionPage = ({ question }) => {
             question={questionData}
             setQuestionData={setQuestionData}
           />
+          <AnswersList answers={questionData.answers} />
         </Main>
         <PopularTags />
       </Layout>
