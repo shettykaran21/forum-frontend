@@ -9,7 +9,7 @@ import api from '@utils/api'
 import { getExistingVoteValue } from '@utils/index'
 import { AuthContext } from '@context/auth'
 
-const UpvoteDownvote = ({ data, setData }) => {
+const UpvoteDownvoteQuestion = ({ data, setData }) => {
   const { isAuthenticated, authState } = useContext(AuthContext)
 
   const { votes, score, _id } = data
@@ -82,4 +82,4 @@ const UpvoteDownvote = ({ data, setData }) => {
   )
 }
 
-export default UpvoteDownvote
+export default UpvoteDownvoteQuestion

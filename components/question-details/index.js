@@ -5,7 +5,7 @@ import Tag from '@components/tag'
 import TagsContainer from '@components/tags-container'
 import { formatDate } from '@utils/index'
 import CommentsList from '@components/comments-list'
-import UpvoteDownvote from '@components/upvote-downvote'
+import UpvoteDownvoteQuestion from '@components/upvote-downvote-question'
 
 const QuestionDetails = ({ question, setQuestionData }) => {
   const { comments, created, tags, text, title } = question
@@ -15,7 +15,7 @@ const QuestionDetails = ({ question, setQuestionData }) => {
   return (
     <Box>
       <Box sx={{ display: 'flex', gap: '1rem' }}>
-        <UpvoteDownvote data={question} setData={setQuestionData} />
+        <UpvoteDownvoteQuestion data={question} setData={setQuestionData} />
         <Box sx={{ flexGrow: 1 }}>
           <PageTitle title={title} />
           <Typography sx={{ margin: '1rem 0' }}>{text}</Typography>

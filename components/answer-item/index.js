@@ -1,7 +1,7 @@
 import { Box, Divider, Typography } from '@mui/material'
 
 import CommentsList from '@components/comments-list'
-import UpvoteDownvote from '@components/upvote-downvote'
+import UpvoteDownvoteAnswer from '@components/upvote-downvote-answer'
 import { formatDate } from '@utils/index'
 
 const AnswerItem = ({ answer, setQuestionData }) => {
@@ -12,7 +12,7 @@ const AnswerItem = ({ answer, setQuestionData }) => {
   return (
     <Box>
       <Box sx={{ display: 'flex', gap: '1rem' }}>
-        <UpvoteDownvote data={answer} setData={setQuestionData} />
+        <UpvoteDownvoteAnswer data={answer} setData={setQuestionData} />
         <Box sx={{ flexGrow: 1 }}>
           <Typography sx={{ margin: '1rem 0' }}>{text}</Typography>
           <Box sx={{ display: 'flex' }}>

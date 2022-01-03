@@ -6,7 +6,7 @@ import Link from '@components/link'
 import Tag from '@components/tag'
 import TagsContainer from '@components/tags-container'
 import { formatDate } from '@utils/index'
-import UpvoteDownvote from '@components/upvote-downvote'
+import UpvoteDownvoteQuestion from '@components/upvote-downvote-question'
 
 const QuestionCard = ({ question }) => {
   const [questionData, setQuestionData] = useState(question)
@@ -31,7 +31,10 @@ const QuestionCard = ({ question }) => {
     >
       <CardContent>
         <Box sx={{ display: 'flex', gap: '1rem' }}>
-          <UpvoteDownvote data={questionData} setData={setQuestionData} />
+          <UpvoteDownvoteQuestion
+            data={questionData}
+            setData={setQuestionData}
+          />
           <Box>
             <Box>
               <Link
