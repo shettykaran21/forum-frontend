@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { Typography } from '@mui/material'
+import { lighten, Typography } from '@mui/material'
 
 import FormTextArea from '@components/form/form-textarea'
 import Button from '@components/button'
@@ -66,8 +66,8 @@ const CommentForm = ({
         variant="outlined"
         onChange={handleChange}
         onBlur={handleBlur}
-        hasError={touched.comment && errors.comment}
-        errorMsg={errors.comment && errors.comment}
+        hasError={touched.text && errors.text}
+        errorMsg={errors.text && errors.text}
       />
       {status && (
         <Typography sx={{ color: lighten('#ff0000', 0.8) }}>
