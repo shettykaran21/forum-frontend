@@ -32,7 +32,7 @@ const SingleQuestionPage = ({ question }) => {
             setQuestionData={setQuestionData}
           />
           <AnswersList
-            answers={questionData.answers}
+            question={questionData}
             setQuestionData={setQuestionData}
           />
         </Main>

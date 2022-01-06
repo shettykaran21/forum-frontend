@@ -3,16 +3,13 @@
 import { css, ClassNames } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
 
-const Button = ({ children, isLoading, ...other }) => {
+const Button = ({ children, isLoading, secondary, ...other }) => {
   const theme = useTheme()
 
   const styles = {
     button: css`
-      background-color: ${theme.palette.primary.main};
-      color: #fff;
       text-transform: none;
       border-radius: 5px;
-      padding: 0.75rem 1.25rem;
       border: none;
       cursor: pointer;
       font-family: inherit;
@@ -22,6 +19,18 @@ const Button = ({ children, isLoading, ...other }) => {
       &:disabled {
         background-color: #aaa;
       }
+    `,
+
+    primary: css`
+      padding: 0.75rem 1.25rem;
+      color: #fff;
+      background-color: ${theme.palette.primary.main};
+    `,
+
+    secondary: css`
+      padding: 0.5rem;
+      background-color: #fff;
+      color: ${theme.palette.primary.main};
     `,
 
     loading: css`
@@ -69,7 +78,11 @@ const Button = ({ children, isLoading, ...other }) => {
       {({ css, cx }) => (
         <button
           {...other}
-          css={cx(css(styles.button), isLoading && css(styles.loading))}
+          css={cx(
+            css(styles.button),
+            secondary ? css(styles.secondary) : css(styles.primary),
+            isLoading && css(styles.loading)
+          )}
         >
           {children}
         </button>

@@ -4,8 +4,8 @@ import CommentsList from '@components/comments-list'
 import UpvoteDownvoteAnswer from '@components/upvote-downvote-answer'
 import { formatDate } from '@utils/index'
 
-const AnswerItem = ({ answer, setQuestionData }) => {
-  const { comments, created, text } = answer
+const AnswerItem = ({ answer, setQuestionData, questionId }) => {
+  const { comments, created, text, _id } = answer
 
   const formattedDate = formatDate(created)
 
@@ -23,7 +23,12 @@ const AnswerItem = ({ answer, setQuestionData }) => {
               {formattedDate}
             </Typography>
           </Box>
-          <CommentsList comments={comments} />
+          <CommentsList
+            comments={comments}
+            setQuestionData={setQuestionData}
+            questionId={questionId}
+            answerId={_id}
+          />
         </Box>
       </Box>
       <Divider />
