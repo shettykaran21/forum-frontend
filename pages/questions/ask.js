@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import QuestionForm from '@components/question/question-form'
+import QuestionForm from '@components/question-form'
 
 const QuestionAskPage = () => {
   return (

@@ -10,6 +10,7 @@ import FormInput from '@components/form/form-input'
 import Form from '@components/form'
 import FormTextArea from '@components/form/form-textarea'
 import Button from '@components/button'
+import FormTagInput from '@components/form/form-tag-input'
 
 const QuestionForm = () => {
   const router = useRouter()
@@ -22,6 +23,7 @@ const QuestionForm = () => {
     touched,
     status,
     handleChange,
+    setFieldValue,
     handleBlur,
     handleSubmit,
     isSubmitting,
@@ -34,6 +36,7 @@ const QuestionForm = () => {
         await api.post('/questions/question', values)
         resetForm({})
         router.push('/')
+        console.log(values)
       } catch (err) {
         setStatus(err.response.data.message)
       }
@@ -82,6 +85,18 @@ const QuestionForm = () => {
         onBlur={handleBlur}
         hasError={touched.text && errors.text}
         errorMsg={errors.text && errors.text}
+      />
+      <FormTagInput
+        label="Tags"
+        type="text"
+        name="tags"
+        value={values.tags}
+        variant="outlined"
+        onChange={(e) => setFieldValue('tags', e, true)}
+        onBlur={handleBlur}
+        hasError={errors.tags}
+        errorMsg={errors.tags && errors.tags}
+        inputInfo="Add up to 5 tags to describe what your question is about"
       />
       {status && (
         <Typography sx={{ color: lighten('#ff0000', 0.8) }}>

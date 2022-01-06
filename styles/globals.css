@@ -15,3 +15,26 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.react-tagsinput {
+  border-radius: 5px;
+  border: none !important;
+  width: 300%;
+  outline: none;
+}
+
+.react-tagsinput + input {
+  display: none;
+}
+
+.react-tagsinput-tag {
+  display: inline-block;
+  background-color: #3d59f022 !important;
+  color: #3d59f0 !important;
+  font-size: 0.875rem !important;
+  border: none !important;
+  font-family: inherit !important;
+  white-space: nowrap;
+  padding: 0.25rem 0.75rem !important;
+  border-radius: 5px !important;
+}
