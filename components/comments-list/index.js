@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { useState } from 'ract'
+import { useState } from 'react'
 
 import CommentItem from '@components/comment-item'
 
