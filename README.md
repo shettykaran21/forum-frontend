@@ -1,8 +1,9 @@
-[Forum Backend Repo](https://github.com/shettykaran21/forum-frontend)
+[Forum Backend Repo](https://github.com/shettykaran21/forum-backend)
 
 ## Some Screenshots
 
 ![Home Page](/screenshots/home.png)
+<br />
 _Home Page_
 
 ![Tags Page](/screenshots/tags.png)
